@@ -1,12 +1,12 @@
 $(document).ready(function(){
 
-    console.log('Document is Ready')
+    console.log('El documento está listo')
 
-    //  getting the date using Date() object and converting it to a string
+    //  Obtener la fecha usando el objeto Date() y convertirla en una cadena de caracteres.
     let date = new Date()
     let current_date = date.toDateString()
 
-    //  display the date on the HTML page using JQUERY and JS
+    //  Monstrar la fecha en la página HTML usando JQUERY Y JS.
     $('#date').text('Date : ' + current_date)
 
     
@@ -16,34 +16,34 @@ $(document).ready(function(){
     let emotion = ""
     let emoji_url = ""
 
-    //  making a function for AJAX request
+    //   Hacer una función para el requerimiento AJAX
     function ajax_request(api_url , input_data){
 
         $.ajax({
 
-            // type of request
+            // Escribir el requerimiento.
             type : 'POST',
 
             // url
             url : api_url,
 
-            //  JSON data
+            //  Datos JSON
             data : JSON.stringify(input_data),
 
-            //  datatype of expected response
+            //  Tipo de datos de la respuesta esperada
             dataType : 'json',
 
-            //  content type
+            //  Tipo de contenido
             contentType : 'application/json',
 
-            //  success method
+            //  Método success - (éxito)
             success : function(result)
             {
-                //  extract the sentiment and emoji path
+                //  Extraer el sentimiento y la ruta del emoticón.
                 emotion = result.sentiment
                 emoji_url = result.path
 
-                //  update the emoticon and sentiment accordingly
+                //  Actualizar el emoticón y el sentimiento segú corresponda.
                 if (product  ==  'Smartphone'){
                     $('#m_emoji').attr('src' , emoji_url)
                     $('#m_emotion').text(emotion)
@@ -73,7 +73,7 @@ $(document).ready(function(){
                 }
             },
 
-            //  error method
+            //  Método error
             error : function(result)
             {
                 console.log(result)
@@ -81,12 +81,12 @@ $(document).ready(function(){
 
         })
 
-        console.log('ajax request sent')
+        console.log('Requerimiento AJAX enviado')
         
     }
 
 
-    //  check if Submit button under 'smartphone' is clicked and get the review accordingly
+    //  Verificar si se hace clic sobre el botón 'enviar' debajo de 'smartphone' y obtener la revisión correspondiente.
     $('#m_button').click(function(){
 
         review = $('#m_textbox').val()
@@ -96,7 +96,7 @@ $(document).ready(function(){
         product = 'Smartphone'
     })
 
-    //  check if Submit button under 'camera' is clicked and get the review accordingly
+    //  Verificar si se hace clic sobre el botón 'enviar' debajo de 'cámara' y obtener la revisión correspondiente.
     $('#c_button').click(function(){
 
         review = $('#c_textbox').val()
@@ -106,7 +106,7 @@ $(document).ready(function(){
         product = 'Digital Camera'
     })
 
-    //  check if Submit button under 'headphones' is clicked and get the review accordingly
+    //  Verificar si se hace clic sobre el botón 'enviar' debajo de 'audífonos' y obtener la revisión correspondiente.
     $('#h_button').click(function(){
 
         review = $('#h_textbox').val()
@@ -116,7 +116,7 @@ $(document).ready(function(){
         product = 'Headphones'
     })
 
-    //  check if Submit button under 'videogame' is clicked and get the review accordingly
+    //  Verificar si se hace clic sobre el botón 'enviar' debajo de 'videojuego' y obtener la revisión correspondiente.
     $('#v_button').click(function(){
 
         review = $('#v_textbox').val()
@@ -127,16 +127,16 @@ $(document).ready(function(){
     })
 
 
-    //  if SAVE button is clicked, hit a post request on the API
+    //   Si se hace clic sobre el botón GUARDAR, poner un requerimientopost en la API.
 
     $('#save_button').click(function(){
 
-        console.log('save button is clicked')
+        console.log('Se ha hecho clic en el botón de guardar')
 
-        //  input data 
+        //  Datos de entrada  
         input_data = {'date' : date , 'product' : product , 'review' : review , 'sentiment' : emotion}
 
-        //  ajax call
+        //  Llamada a AJAX.
         $.ajax({
             type : 'POST',
             url : '/save',
@@ -151,14 +151,14 @@ $(document).ready(function(){
             }
         })
 
-        // clearing textboxes
+        // Vaciar cajas de texto.
         $('#m_textbox').val('')
         $('#c_textbox').val('')
         $('#h_textbox').val('')
         $('#v_textbox').val('')
     })
 
-    // calling the displaybot function, when DOM is ready
+    // llamar a la función displaybot, cuando DOM está listo
     displayBot()
 
 })
@@ -166,33 +166,33 @@ $(document).ready(function(){
 
 function displayBot() {
 
-    //  when chatbot button is clicked
-    //Activity1
+    //  Cuando se hace clic en el botón del chatbot.
+    //Actividad1
     $('').click(function () {
 
-        //  toggle the chatbot chat window
+        //  cambiar la ventana de chat del chatbot.
         $('.chatbox__chat').toggle()
     });
 
-    //Start Conversation with Bot
+    //Iniciar conversación con el bot.
     askBot()
 }
 
 function askBot() {
 
-    //  when send button is clicked
-    //Activity2
+    //  Cuando se hace clic en el botón de enviar
+    //Actividad2
     $("").click(function () {
 
-        //  get text from textbox in chatbot
+        //  Obtener el texto de la caja de texto en el chatbot.
         var user_bot_input_text = $("#bot_input_text").val()
 
         if (user_bot_input_text != "") {
            
-            //  add a new div element in the chat window
+            //  Añadir un nuevo elemento div en la ventana de chat.
             $("#chat_messages").append('<div class="user__messages">' + user_bot_input_text + ' </div>')
             
-            //Clear the text input box after sending message
+            //Borrar el cuadro de entrada de texto después de enviar el mensaje.
             $("#bot_input_text").val('');
 
             let chat_input_data = {
@@ -202,8 +202,8 @@ function askBot() {
             $.ajax({
                 type: 'POST',
 
-                //  write the same URL as written in app.py file
-                //Activity3
+                //  Escribir la misma URL que en el archivo app.py
+                //Actividad3
                 url: "",
 
                 data: JSON.stringify(chat_input_data),
@@ -225,9 +225,9 @@ function askBot() {
     })
 
     $('#bot_input_text').keypress(function(e){
-        //If Enter key(key code is 13) pressed
+        //Si se pulsa la tecla Intro (código de la tecla es 13):
         if(e.which == 13){         
-            $('#send_button').click(); //Trigger Send Button Click Event
+            $('#send_button').click(); //Activar evento de clic de botón de envío
         }
     });
 }
