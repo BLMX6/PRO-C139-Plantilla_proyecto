@@ -6,7 +6,7 @@ $(document).ready(function(){
     let date = new Date()
     let current_date = date.toDateString()
 
-    //  Monstrar la fecha en la página HTML usando JQUERY Y JS.
+    //  Mostrar la fecha en la página HTML usando JQUERY Y JS.
     $('#date').text('Date : ' + current_date)
 
     
@@ -158,7 +158,7 @@ $(document).ready(function(){
         $('#v_textbox').val('')
     })
 
-    // llamar a la función displaybot, cuando DOM está listo
+    // Llamar a la función displaybot, cuando DOM está listo
     displayBot()
 
 })
@@ -170,7 +170,7 @@ function displayBot() {
     //Actividad1
     $('').click(function () {
 
-        //  cambiar la ventana de chat del chatbot.
+        //  Cambiar la ventana de chat del chatbot.
         $('.chatbox__chat').toggle()
     });
 
